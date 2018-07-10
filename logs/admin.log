@@ -2684,3 +2684,12 @@
 2018-07-09 10:21:46,761 [DEBUG] [http-nio-8080-exec-3] io.renren.modules.job.dao.ScheduleJobDao.selectPage [BaseJdbcLogger.java : 159] ==>  Preparing: SELECT job_id AS jobId,bean_name AS beanName,method_name AS methodName,params,cron_expression AS cronExpression,`status`,remark,create_time AS createTime FROM schedule_job LIMIT 0,10 
 2018-07-09 10:21:46,761 [DEBUG] [http-nio-8080-exec-3] io.renren.modules.job.dao.ScheduleJobDao.selectPage [BaseJdbcLogger.java : 159] ==> Parameters: 
 2018-07-09 10:21:46,766 [DEBUG] [http-nio-8080-exec-3] io.renren.modules.job.dao.ScheduleJobDao.selectPage [BaseJdbcLogger.java : 159] <==      Total: 2
+2018-07-09 10:30:00,049 [INFO] [RenrenScheduler_Worker-1] io.renren.modules.job.utils.ScheduleJob [ScheduleJob.java : 67] 任务准备执行，任务ID：1
+2018-07-09 10:30:00,050 [INFO] [pool-1-thread-1] io.renren.modules.job.task.TestTask [TestTask.java : 43] 我是带参数的test方法，正在被执行，参数为：renren
+2018-07-09 10:30:01,051 [DEBUG] [pool-1-thread-1] io.renren.modules.sys.dao.SysUserDao.selectById [BaseJdbcLogger.java : 159] ==>  Preparing: SELECT user_id AS userId,username,`password`,salt,email,mobile,`status`,create_time AS createTime,dept_id AS deptId FROM sys_user WHERE user_id=? 
+2018-07-09 10:30:01,051 [DEBUG] [pool-1-thread-1] io.renren.modules.sys.dao.SysUserDao.selectById [BaseJdbcLogger.java : 159] ==> Parameters: 1(Long)
+2018-07-09 10:30:01,058 [DEBUG] [pool-1-thread-1] io.renren.modules.sys.dao.SysUserDao.selectById [BaseJdbcLogger.java : 159] <==      Total: 1
+2018-07-09 10:30:01,064 [INFO] [RenrenScheduler_Worker-1] io.renren.modules.job.utils.ScheduleJob [ScheduleJob.java : 80] 任务执行完毕，任务ID：1  总共耗时：1015毫秒
+2018-07-09 10:30:01,075 [DEBUG] [RenrenScheduler_Worker-1] io.renren.modules.job.dao.ScheduleJobLogDao.insert [BaseJdbcLogger.java : 159] ==>  Preparing: INSERT INTO schedule_job_log ( job_id, bean_name, method_name, params, `status`, times, create_time ) VALUES ( ?, ?, ?, ?, ?, ?, ? ) 
+2018-07-09 10:30:01,076 [DEBUG] [RenrenScheduler_Worker-1] io.renren.modules.job.dao.ScheduleJobLogDao.insert [BaseJdbcLogger.java : 159] ==> Parameters: 1(Long), testTask(String), test(String), renren(String), 0(Integer), 1015(Integer), 2018-07-09 10:30:00.049(Timestamp)
+2018-07-09 10:30:01,083 [DEBUG] [RenrenScheduler_Worker-1] io.renren.modules.job.dao.ScheduleJobLogDao.insert [BaseJdbcLogger.java : 159] <==    Updates: 1
