@@ -378,3 +378,39 @@ CREATE INDEX IDX_QRTZ_FT_J_G ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,JOB_NAME,JOB_GROU
 CREATE INDEX IDX_QRTZ_FT_JG ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,JOB_GROUP);
 CREATE INDEX IDX_QRTZ_FT_T_G ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,TRIGGER_NAME,TRIGGER_GROUP);
 CREATE INDEX IDX_QRTZ_FT_TG ON QRTZ_FIRED_TRIGGERS(SCHED_NAME,TRIGGER_GROUP);
+
+-- 客户信息表
+CREATE TABLE `sys_client_info` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(11) DEFAULT NULL,
+  `pass_word` varchar(16) DEFAULT NULL,
+  `invite_userid` int(11) DEFAULT NULL,
+  `status` int(2) DEFAULT NULL,
+  `card_id` varchar(18) DEFAULT NULL,
+  `real_name` varchar(10) DEFAULT NULL,
+  `nick_name` varchar(10) DEFAULT NULL,
+  `birthday` date DEFAULT NULL,
+  `phone` varchar(11) DEFAULT NULL,
+  `email` varchar(30) DEFAULT NULL,
+  `sex` tinyint(1) DEFAULT NULL,
+  `add_time` datetime DEFAULT NULL,
+  `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- 菜单SQL
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    VALUES ('41', '客户列表', 'modules/sys/sysclientinfo.html', NULL, '1', 'fa fa-file-code-o', '6');
+
+-- 按钮父菜单ID
+set @parentId = @@identity;
+
+-- 菜单对应按钮SQL
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    SELECT @parentId, '查看', null, 'sys:sysclientinfo:list,sys:sysclientinfo:info', '2', null, '6';
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    SELECT @parentId, '新增', null, 'sys:sysclientinfo:save', '2', null, '6';
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    SELECT @parentId, '修改', null, 'sys:sysclientinfo:update', '2', null, '6';
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    SELECT @parentId, '删除', null, 'sys:sysclientinfo:delete', '2', null, '6';
