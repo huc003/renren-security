@@ -46,16 +46,16 @@ $(function () {
         url: baseURL + 'sys/sysclientpointdetails/list',
         datatype: "json",
         colModel: [
-            {label: '主键', name: 'id', index: 'id', width: 30, key: true},
-            {label: '积分', name: 'point', index: 'point', width: 30},
-            {label: '用户ID', name: 'userId', index: 'user_id', width: 30},
-            {label: '积分来源', name: 'sourceType', index: 'source_type', width: 30},
-            {label: '添加时间', name: 'addtime', index: 'addtime', width: 30},
-            {label: '积分类型', name: 'pointType', index: 'point_type', width: 30},
+            {label: '主键', name: 'id', index: 'id', width: 15, key: true},
+            {label: '积分', name: 'point', index: 'point', width: 20},
+            {label: '用户ID', name: 'userId', index: 'user_id', width: 20},
+            {label: '积分来源', name: 'sourceType', index: 'source_type', width: 20},
+            {label: '添加时间', name: 'addtime', index: 'addtime', width: 35},
+            {label: '积分类型', name: 'pointType', index: 'point_type', width: 20},
             {label: '积分说明', name: 'source', index: 'source', width: 30},
-            {label: '过期时间', name: 'expiredTime', index: 'expired_time', width: 30},
-            {label: '剩余积分', name: 'overage', index: 'overage', width: 30},
-            {label: '已使用积分', name: 'pointUsed', index: 'point_used', width: 30}
+            {label: '过期时间', name: 'expiredTime', index: 'expired_time', width: 35},
+            {label: '剩余积分', name: 'overage', index: 'overage', width: 20},
+            {label: '已使用积分', name: 'pointUsed', index: 'point_used', width: 20}
         ],
         viewrecords: true,
         height: 385,
@@ -64,7 +64,6 @@ $(function () {
         rownumbers: true,
         rownumWidth: 25,
         autowidth: true,
-        // multiselect: true,
         pager: "#jqGridPager2",
         jsonReader: {
             root: "page.list",

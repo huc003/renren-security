@@ -3,6 +3,7 @@ package io.renren.modules.sys.service;
 import com.baomidou.mybatisplus.service.IService;
 import io.renren.common.utils.PageUtils;
 import io.renren.modules.sys.entity.SysClientPointDetailsEntity;
+import io.renren.modules.sys.entity.vo.SysClientPointVo;
 
 import java.util.Map;
 
@@ -16,5 +17,7 @@ import java.util.Map;
 public interface SysClientPointDetailsService extends IService<SysClientPointDetailsEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    void save(SysClientPointVo sysClientPointVo);
 }
 

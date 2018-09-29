@@ -20,5 +20,7 @@ public interface SysClientPointService extends IService<SysClientPointEntity> {
     PageUtils queryPage(Map<String, Object> params);
 
     R save(SysClientPointVo sysClientPointVo);
+
+    SysClientPointEntity queryUserPoint(Integer userId);
 }
 
