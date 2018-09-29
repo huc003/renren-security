@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.sys.dao.SysClientPointDetailsDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.sys.entity.SysClientPointDetailsEntity" id="sysClientPointDetailsMap">
+        <result property="id" column="id"/>
+        <result property="point" column="point"/>
+        <result property="userId" column="user_id"/>
+        <result property="sourceType" column="source_type"/>
+        <result property="addtime" column="addtime"/>
+        <result property="pointType" column="point_type"/>
+        <result property="source" column="source"/>
+        <result property="expiredTime" column="expired_time"/>
+        <result property="overage" column="overage"/>
+        <result property="pointUsed" column="point_used"/>
+    </resultMap>
+
+
+</mapper>

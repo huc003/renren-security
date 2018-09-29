@@ -414,3 +414,101 @@ INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `or
     SELECT @parentId, '修改', null, 'sys:sysclientinfo:update', '2', null, '6';
 INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
     SELECT @parentId, '删除', null, 'sys:sysclientinfo:delete', '2', null, '6';
+
+
+-- 红包券信息表
+CREATE TABLE `sys_client_reward` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL COMMENT '用户id',
+  `money` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '金额',
+  `type` tinyint(4) NOT NULL DEFAULT '1' COMMENT '获取方式1 注册红包、2 实名认证、  3 手机认证',
+  `is_use` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态【0:未使用（默认）;1:已使用;2:冻结;】',
+  `timeout` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '红包过期时间【0:不过期;时间戳就表示红包到期的时间;】',
+  `addtime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '获取红包时间',
+  `username` varchar(50) COLLATE utf8_unicode_ci NOT NULL COMMENT '用户名',
+  `recommended_id` int(11) DEFAULT NULL COMMENT '被推荐人id',
+  `usetime` datetime DEFAULT NULL COMMENT '红包使用时间',
+  `reward_no` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '红包编号',
+  `reward_style` tinyint(4) DEFAULT '1' COMMENT '红包类型【1:活动红包;2:推荐红包;】',
+  `reward_name` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '红包名称',
+  `use_together` tinyint(4) DEFAULT '2' COMMENT '是否可叠加使用【1:是;2:否;】',
+  `weixin_id` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT '微信账号',
+  `money_limit` decimal(14,2) DEFAULT '1000.00' COMMENT '满多少可使用',
+  `sign` tinyint(4) DEFAULT '1' COMMENT '标记【0:到期不提醒;1:到期提醒;2：已提醒;】',
+  PRIMARY KEY (`id`),
+  KEY `idx_dw_user_reward_user_id` (`user_id`) USING BTREE,
+  KEY `idx_dw_user_reward_reward_no` (`reward_no`) USING BTREE,
+  KEY `idx_dw_user_reward_is_use` (`is_use`) USING BTREE,
+  KEY `idx_dw_user_reward_timeout` (`timeout`) USING BTREE,
+  KEY `idx_dw_user_reward_reward_name` (`reward_name`) USING BTREE,
+  KEY `IDX_REWARD_NAME_USER_ID` (`reward_name`,`user_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=1833487608 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='红包信息表';
+
+
+
+
+-- 菜单SQL
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    VALUES ('52', '红包信息表', 'modules/sys/sysclientreward.html', NULL, '1', 'fa fa-file-code-o', '6');
+
+-- 按钮父菜单ID
+set @parentId = @@identity;
+
+-- 菜单对应按钮SQL
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    SELECT @parentId, '查看', null, 'sys:sysclientreward:list,sys:sysclientreward:info', '2', null, '6';
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    SELECT @parentId, '新增', null, 'sys:sysclientreward:save', '2', null, '6';
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    SELECT @parentId, '修改', null, 'sys:sysclientreward:update', '2', null, '6';
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    SELECT @parentId, '删除', null, 'sys:sysclientreward:delete', '2', null, '6';
+
+
+DROP TABLE IF EXISTS `sys_client_point`;
+CREATE TABLE `sys_client_point` (
+  `user_id` int(11) NOT NULL COMMENT '用户标识',
+  `point` int(11) DEFAULT '0' COMMENT '拥有积分',
+  `point_used` int(11) DEFAULT '0' COMMENT '使用积分',
+  `point_expired` int(11) DEFAULT '0' COMMENT '过期积分',
+  `point_frozen` int(11) DEFAULT '0' COMMENT '冻结积分',
+  `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户积分';
+
+
+-- 菜单SQL
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    VALUES ('58', '用户积分', 'modules/sys/sysclientpoint.html', NULL, '1', 'fa fa-file-code-o', '6');
+
+-- 按钮父菜单ID
+set @parentId = @@identity;
+
+-- 菜单对应按钮SQL
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    SELECT @parentId, '查看', null, 'sys:sysclientpoint:list,sys:sysclientpoint:info', '2', null, '6';
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    SELECT @parentId, '新增', null, 'sys:sysclientpoint:save', '2', null, '6';
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    SELECT @parentId, '修改', null, 'sys:sysclientpoint:update', '2', null, '6';
+INSERT INTO `sys_menu` (`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`)
+    SELECT @parentId, '删除', null, 'sys:sysclientpoint:delete', '2', null, '6';
+
+
+DROP TABLE IF EXISTS `dw_user_point_details`;
+CREATE TABLE `sys_client_point_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增标识',
+  `point` int(11) DEFAULT NULL COMMENT '积分（可负）',
+  `user_id` int(11) NOT NULL COMMENT '用户标识',
+  `source_type` tinyint(1) DEFAULT NULL COMMENT '积分来源',
+  `addtime` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '添加时间',
+  `point_type` tinyint(1) DEFAULT NULL COMMENT '积分类型（1.增加 2.扣除）',
+  `source` text COLLATE utf8_unicode_ci,
+  `expired_time` datetime DEFAULT NULL,
+  `overage` int(11) DEFAULT '0' COMMENT '剩余积分',
+  `point_used` int(11) DEFAULT '0' COMMENT '已使用积分',
+  PRIMARY KEY (`id`,`addtime`),
+  KEY `idx_dw_user_point_details_user_id` (`user_id`) USING BTREE,
+  KEY `idx_dw_user_point_details_point_type` (`point_type`) USING BTREE,
+  KEY `idx_dw_user_point_details_expired_time` (`expired_time`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=7466 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户点细节';

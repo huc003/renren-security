@@ -11,5 +11,5 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @date 2018-09-25 13:32:18
  */
 public interface SysClientInfoDao extends BaseMapper<SysClientInfoEntity> {
-	
+    SysClientInfoEntity queryClientInfoByUserName(String userName);
 }

@@ -36,4 +36,9 @@ public class SysClientInfoServiceImpl extends ServiceImpl<SysClientInfoDao, SysC
         super.insert(sysClientInfo);
     }
 
+    @Override
+    public SysClientInfoEntity queryClientInfoByUserName(String userName) {
+        return baseMapper.queryClientInfoByUserName(userName);
+    }
+
 }

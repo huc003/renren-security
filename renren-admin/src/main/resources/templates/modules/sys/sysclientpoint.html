@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>用户积分</title>
+    <#include "/header.html">
+        </head>
+<body>
+<div id="rrapp" v-cloak>
+    <div id="point">
+        <div v-show="showList">
+            <div class="grid-btn">
+                <div class="form-group col-sm-2">
+                    <input type="text" class="form-control" v-model="q.userId" @keyup.enter="query" placeholder="用户ID">
+                </div>
+                <a class="btn btn-default" @click="query">查询</a>
+                <#if shiro.hasPermission("sys:sysclientpoint:save")>
+                    <a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+                </#if>
+                <!--<#if shiro.hasPermission("sys:sysclientpoint:delete")>-->
+                    <!--<a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>-->
+                <!--</#if>-->
+            </div>
+            <table id="jqGrid"></table>
+            <div id="jqGridPager"></div>
+        </div>
+
+        <div v-show="!showList" class="panel panel-default">
+            <div class="panel-heading">{{title}}</div>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-sm-2 control-label">用户名</div>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="userName" v-model="sysClientPoint.userName"
+                                   placeholder="用户名"/>
+                            <div class="input-group-addon">
+                                <span>*必填</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2 control-label">积分</div>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <input type="text" name="point" class="form-control" v-model="sysClientPoint.point"
+                                   placeholder="积分"/>
+                            <div class="input-group-addon">
+                                <span>*必填</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2 control-label">类型</div>
+                    <div class="col-sm-10">
+                        <label class="radio-inline">
+                            <input type="radio" name="type" value="0" v-model="sysClientPoint.type"/> 增加
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="type" value="1" v-model="sysClientPoint.type"/> 减少
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-2 control-label"></div>
+                    <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                    &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="point_detail">
+        <div class="grid-btn">
+            <input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+        </div>
+        <table id="jqGrid2"></table>
+        <div id="jqGridPager2"></div>
+    </div>
+</div>
+
+<script src="${request.contextPath}/statics/js/modules/sys/sysclientpoint.js?_${.now?long}"></script>
+</body>
+</html>

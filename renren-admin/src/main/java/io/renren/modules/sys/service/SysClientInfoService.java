@@ -18,5 +18,7 @@ public interface SysClientInfoService extends IService<SysClientInfoEntity> {
     PageUtils queryPage(Map<String, Object> params);
 
     void save(SysClientInfoEntity sysClientInfo);
+
+    SysClientInfoEntity queryClientInfoByUserName(String userName);
 }
 

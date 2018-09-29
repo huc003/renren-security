@@ -22,4 +22,7 @@
     <!--</resultMap>-->
 
 
+    <select id="queryClientInfoByUserName" resultType="io.renren.modules.sys.entity.SysClientInfoEntity">
+        select * from sys_client_info where user_name = #{userName}
+    </select>
 </mapper>
